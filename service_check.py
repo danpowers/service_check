@@ -28,6 +28,8 @@ class ConnectionHandler(SocketServer.BaseRequestHandler):
                 port = str(self.data)
                 raise Exception("Bad port value " + port)
             s.connect((hostname, port))
+            if self.server.myproxy:
+                s.sendall("hello")
             reply = s.recv(4096).strip()
             if not expected_reply_string in reply:
                 raise Exception(unexpected_reply_exception)
