@@ -57,7 +57,7 @@ class LogWriter(Thread):
             while True:
                 time, host, port, result, msg = self.logger_queue.get()
                 csvOutputFileWriter.writerow([time.strftime("%H:%M:%S %d-%m-%Y"), host, port, result, msg])
-                self.outputfile.flush()
+                outputfile.flush()
                 self.logger_queue.task_done()
 
 def parse_arguments():
