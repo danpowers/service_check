@@ -52,9 +52,9 @@ class LogWriter(Thread):
         self.logfile = logfile
 
     def run(self):
-        with open(self.logfile, 'ab+') as outputfile:
-            csvOutputFileWriter = csv.writer(outputfile, delimiter=',')
-            while True:
+        while True:
+            with open(self.logfile, 'ab+') as outputfile:
+                csvOutputFileWriter = csv.writer(outputfile, delimiter=',')
                 time, host, port, result, msg = self.logger_queue.get()
                 csvOutputFileWriter.writerow([time.strftime("%H:%M:%S %d-%m-%Y"), host, port, result, msg])
                 outputfile.flush()
